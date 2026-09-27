@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App de Vezes</title>
+<style>
+body{background:#0f172a;color:white;font-family:Arial;display:flex;justify-content:center;padding:20px}
+.caixa{background:#1e293b;padding:25px;border-radius:20px;width:100%;max-width:360px;text-align:center}
+h1{color:#22c55e} input{width:35%;padding:15px;font-size:22px;text-align:center;border-radius:10px;border:none;margin:5px}
+button{width:100%;padding:15px;background:#22c55e;border:none;border-radius:12px;color:white;font-size:20px;font-weight:bold;margin-top:15px}
+#resultado{margin-top:20px;font-size:30px;background:#0f172a;padding:20px;border-radius:12px}
+</style></head>
+<body><div class="caixa">
+<h1>✖️ DE VEZES</h1>
+<input type="number" id="n1" placeholder="0"> <span>x</span> <input type="number" id="n2" placeholder="0">
+<button onclick="calcular()">CALCULAR</button>
+<div id="resultado">?</div>
+</div>
+<script>
+function calcular(){
+let a=Number(document.getElementById('n1').value);
+let b=Number(document.getElementById('n2').value);
+document.getElementById('resultado').innerHTML=a+" x "+b+" = <b style='color:#22c55e'>"+(a*b)+"</b>";
+}
+</script></body></html>
