@@ -1,23 +1,69 @@
 <!DOCTYPE html>
-<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>App de Vezes</title>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Completa</title>
 <style>
-body{background:#0f172a;color:white;font-family:Arial;display:flex;justify-content:center;padding:20px}
-.caixa{background:#1e293b;padding:25px;border-radius:20px;width:100%;max-width:360px;text-align:center}
-h1{color:#22c55e} input{width:35%;padding:15px;font-size:22px;text-align:center;border-radius:10px;border:none;margin:5px}
-button{width:100%;padding:15px;background:#22c55e;border:none;border-radius:12px;color:white;font-size:20px;font-weight:bold;margin-top:15px}
-#resultado{margin-top:20px;font-size:30px;background:#0f172a;padding:20px;border-radius:12px}
-</style></head>
-<body><div class="caixa">
-<h1>✖️ DE VEZES</h1>
-<input type="number" id="n1" placeholder="0"> <span>x</span> <input type="number" id="n2" placeholder="0">
-<button onclick="calcular()">CALCULAR</button>
-<div id="resultado">?</div>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f172a;color:white;font-family:Arial;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:15px}
+.caixa{background:#1e293b;padding:20px;border-radius:24px;width:100%;max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+h1{text-align:center;color:#22c55e;margin-bottom:15px;font-size:22px}
+#visor{background:#0f172a;padding:18px;border-radius:15px;text-align:right;font-size:32px;min-height:70px;word-wrap:break-word;border:2px solid #334155;margin-bottom:15px}
+.botoes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+button{padding:18px;border:none;border-radius:12px;font-size:20px;font-weight:bold;cursor:pointer;transition:.1s}
+button:active{transform:scale(.92)}
+.num{background:#334155;color:white}
+.op{background:#475569;color:#22c55e}
+.igual{background:#22c55e;color:white;grid-column:span 2}
+.limpar{background:#ef4444;color:white}
+.fun{background:#1e40af;color:white}
+</style>
+</head>
+<body>
+<div class="caixa">
+<h1>✖️ CALCULADORA COMPLETA</h1>
+<div id="visor">0</div>
+<div class="botoes">
+<button class="limpar" onclick="limpar()">C</button>
+<button class="fun" onclick="apagar()">⌫</button>
+<button class="fun" onclick="add('%')">%</button>
+<button class="op" onclick="add('/')">÷</button>
+
+<button class="num" onclick="add('7')">7</button>
+<button class="num" onclick="add('8')">8</button>
+<button class="num" onclick="add('9')">9</button>
+<button class="op" onclick="add('*')">×</button>
+
+<button class="num" onclick="add('4')">4</button>
+<button class="num" onclick="add('5')">5</button>
+<button class="num" onclick="add('6')">6</button>
+<button class="op" onclick="add('-')">-</button>
+
+<button class="num" onclick="add('1')">1</button>
+<button class="num" onclick="add('2')">2</button>
+<button class="num" onclick="add('3')">3</button>
+<button class="op" onclick="add('+')">+</button>
+
+<button class="fun" onclick="add('**')">xʸ</button>
+<button class="num" onclick="add('0')">0</button>
+<button class="num" onclick="add('.')">.</button>
+<button class="igual" onclick="calcular()">=</button>
+</div>
 </div>
 <script>
+let visor=document.getElementById('visor');
+function add(v){if(visor.innerHTML=='0')visor.innerHTML=''; visor.innerHTML+=v;}
+function limpar(){visor.innerHTML='0';}
+function apagar(){visor.innerHTML=visor.innerHTML.slice(0,-1)||'0';}
 function calcular(){
-let a=Number(document.getElementById('n1').value);
-let b=Number(document.getElementById('n2').value);
-document.getElementById('resultado').innerHTML=a+" x "+b+" = <b style='color:#22c55e'>"+(a*b)+"</b>";
+try{
+let exp=visor.innerHTML.replace('÷','/').replace('×','*');
+let res=eval(exp);
+if(res==Infinity){visor.innerHTML='Erro';return;}
+visor.innerHTML=res;
+}catch{visor.innerHTML='Erro';}
 }
-</script></body></html>
+</script>
+</body>
+</html>
